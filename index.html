@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="업무 포털">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="format-detection" content="telephone=no, address=no, email=no">
+  <meta name="theme-color" content="#1565C0">
+  <meta name="description" content="자이C&A 모바일 업무 포털 – SharePoint 주요 사이트 바로가기">
+
+  <title>모바일 업무 포털 | 자이C&A</title>
+
+  <!-- Favicon (인라인 SVG, 별도 파일 불필요) -->
+  <link rel="icon" type="image/svg+xml"
+        href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%231565C0'/%3E%3Crect x='8' y='9' width='16' height='3' rx='1' fill='%23fff'/%3E%3Crect x='8' y='15' width='12' height='3' rx='1' fill='%23fff'/%3E%3Crect x='8' y='21' width='8' height='3' rx='1' fill='%23fff'/%3E%3C/svg%3E">
+  <link rel="apple-touch-icon"
+        href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'%3E%3Crect width='180' height='180' rx='40' fill='%231565C0'/%3E%3Crect x='44' y='50' width='92' height='16' rx='8' fill='%23fff'/%3E%3Crect x='44' y='82' width='72' height='16' rx='8' fill='%23fff'/%3E%3Crect x='44' y='114' width='52' height='16' rx='8' fill='%23fff'/%3E%3C/svg%3E">
+
+  <!--
+    ★ 폰트: iOS(Apple SD Gothic Neo) / Android(Roboto) 에서 서로 다르게 보이는 문제를
+      Noto Sans KR 웹폰트로 통일합니다.
+      ※ 사내 네트워크에서 Google Fonts 접근이 차단된 경우, 폰트 파일을 자체 호스팅하거나
+         아래 세 줄을 제거하면 각 기기의 시스템 폰트로 fallback됩니다.
+  -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    /* ──────────────────────────────────────
+       Reset & CSS 변수
+    ────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --blue:    #1565C0;
+      --blue-d:  #0D47A1;
+      --blue-dd: #1A237E;
+      --surface: #F0F4FA;
+      --card:    #FFFFFF;
+      --txt-hi:  #111827;
+      --txt-lo:  #64748B;
+      --radius:  22px;
+      --shadow:  0 4px 28px rgba(21,101,192,.11), 0 1px 4px rgba(0,0,0,.05);
+    }
+
+    body {
+      /* iOS · Android 동일 폰트: Noto Sans KR → 시스템 fallback 순 */
+      font-family: 'Noto Sans KR', -apple-system, BlinkMacSystemFont,
+                   'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+      background: var(--surface);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      word-break: keep-all;
+    }
+
+    /* ──────────────────────────────────────
+       HEADER
+    ────────────────────────────────────── */
+    .header {
+      background: linear-gradient(150deg, #1C6DD0 0%, #0D47A1 50%, #1A237E 100%);
+      color: #fff;
+      padding: 50px 24px 42px;
+      position: relative;
+      overflow: hidden;
+      text-align: center;
+    }
+
+    .header::before {
+      content: '';
+      position: absolute; top: -70px; right: -50px;
+      width: 220px; height: 220px; border-radius: 50%;
+      background: rgba(255,255,255,.07); pointer-events: none;
+    }
+    .header::after {
+      content: '';
+      position: absolute; bottom: -55px; left: -25px;
+      width: 150px; height: 150px; border-radius: 50%;
+      background: rgba(255,255,255,.05); pointer-events: none;
+    }
+
+    .header-label {
+      font-size: 11px; font-weight: 700; letter-spacing: 2.5px;
+      text-transform: uppercase; color: rgba(255,255,255,.55);
+      margin-bottom: 10px; position: relative;
+    }
+
+    .header-title {
+      font-size: 28px; font-weight: 900;
+      letter-spacing: -1px; line-height: 1.2;
+      position: relative;
+    }
+
+    .header-sub {
+      font-size: 13px; font-weight: 400;
+      color: rgba(255,255,255,.68); margin-top: 7px;
+      position: relative;
+    }
+
+    .header-date {
+      display: inline-flex; align-items: center; gap: 6px;
+      margin-top: 20px;
+      background: rgba(255,255,255,.14);
+      border: 1px solid rgba(255,255,255,.22);
+      border-radius: 24px; padding: 7px 18px;
+      font-size: 12px; font-weight: 500;
+      color: rgba(255,255,255,.88);
+      position: relative;
+    }
+
+    /* ──────────────────────────────────────
+       MAIN
+    ────────────────────────────────────── */
+    .main {
+      flex: 1;
+      padding: 28px 16px 40px;
+      width: 100%;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 11px; font-weight: 700;
+      letter-spacing: 1.5px; text-transform: uppercase;
+      color: var(--txt-lo); margin-bottom: 16px;
+    }
+    .section-label::before {
+      content: ''; display: block;
+      width: 4px; height: 14px;
+      background: var(--blue); border-radius: 3px; flex-shrink: 0;
+    }
+
+    /* ──────────────────────────────────────
+       GRID
+       모바일        : 2열
+       태블릿(600+)  : 2열, 여백 확대
+       태블릿가로(860+) : 4열
+    ────────────────────────────────────── */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+    }
+
+    @media (min-width: 600px) {
+      .main { padding: 32px 24px 48px; }
+      .grid { gap: 18px; }
+    }
+
+    @media (min-width: 860px) {
+      .main { padding: 40px 32px 60px; }
+      .grid { grid-template-columns: repeat(4, 1fr); gap: 20px; }
+    }
+
+    @media (min-width: 1100px) {
+      .grid { gap: 24px; }
+    }
+
+    /* ──────────────────────────────────────
+       CARD
+    ────────────────────────────────────── */
+    .card {
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(255,255,255,.9);
+      padding: 30px 16px 24px;
+      display: flex; flex-direction: column; align-items: center; text-align: center;
+      cursor: pointer;
+      position: relative; overflow: hidden;
+      transition: transform .15s ease, box-shadow .15s ease;
+      -webkit-tap-highlight-color: transparent;
+      user-select: none;
+    }
+
+    /* 상단 포인트 컬러 바 */
+    .card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0;
+      height: 4px;
+      background: var(--accent, var(--blue));
+      border-radius: var(--radius) var(--radius) 0 0;
+    }
+
+    /* 카드 하단 미묘한 컬러 틴트 */
+    .card::after {
+      content: '';
+      position: absolute; bottom: 0; left: 0; right: 0;
+      height: 60px;
+      background: linear-gradient(to top, color-mix(in srgb, var(--accent, var(--blue)) 4%, transparent), transparent);
+      border-radius: 0 0 var(--radius) var(--radius);
+      pointer-events: none;
+    }
+
+    .card:active {
+      transform: scale(0.955);
+      box-shadow: 0 2px 10px rgba(0,0,0,.08);
+    }
+
+    .card:focus-visible {
+      outline: 3px solid var(--blue);
+      outline-offset: 3px;
+    }
+
+    @media (min-width: 600px) { .card { padding: 36px 22px 28px; } }
+    @media (min-width: 860px) { .card { padding: 38px 24px 30px; } }
+
+    /* ──────────────────────────────────────
+       ICON BOX
+       gradient 배경 → 더욱 입체감 있는 아이콘 영역
+    ────────────────────────────────────── */
+    .icon-box {
+      width: 84px; height: 84px;
+      border-radius: 24px;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 18px; flex-shrink: 0;
+      box-shadow: 0 4px 16px rgba(0,0,0,.10);
+      position: relative;
+    }
+
+    .icon-box svg { width: 46px; height: 46px; }
+    .icon-box img { width: 50px; height: 50px; object-fit: contain; border-radius: 20px; }
+
+    @media (min-width: 600px) {
+      .icon-box { width: 92px; height: 92px; border-radius: 26px; }
+      .icon-box svg { width: 52px; height: 52px; }
+      .icon-box img { width: 56px; height: 56px; }
+    }
+
+    @media (min-width: 860px) {
+      .icon-box { width: 86px; height: 86px; }
+      .icon-box svg { width: 48px; height: 48px; }
+    }
+
+    /* ──────────────────────────────────────
+       CARD 텍스트
+    ────────────────────────────────────── */
+    .card-title {
+      font-size: 15px; font-weight: 800;
+      color: var(--txt-hi);
+      letter-spacing: -0.3px;
+      line-height: 1.3; margin-bottom: 6px;
+    }
+
+    .card-desc {
+      font-size: 11.5px; font-weight: 400;
+      color: var(--txt-lo); line-height: 1.6;
+    }
+
+    @media (min-width: 600px) {
+      .card-title { font-size: 16px; }
+      .card-desc  { font-size: 12.5px; }
+    }
+
+    @media (min-width: 860px) {
+      .card-title { font-size: 15px; }
+      .card-desc  { font-size: 12px; }
+    }
+
+    /* ──────────────────────────────────────
+       FOOTER
+    ────────────────────────────────────── */
+    .footer {
+      padding: 18px 20px; text-align: center;
+      background: #fff; border-top: 1px solid #E5EAF2;
+    }
+
+    .footer-brand {
+      font-size: 14px; font-weight: 800; letter-spacing: -0.3px;
+      background: linear-gradient(135deg, var(--blue), var(--blue-d));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .footer-copy { font-size: 10.5px; color: #9CA3AF; margin-top: 3px; font-weight: 400; }
+
+    .no-js-msg {
+      text-align: center; padding: 48px 24px;
+      font-size: 14px; color: var(--txt-lo); line-height: 1.7;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── HEADER ── -->
+  <header class="header">
+    <p class="header-label">자이C&A</p>
+    <h1 class="header-title">모바일 업무 포털</h1>
+    <p class="header-sub">주요 업무 시스템 바로가기</p>
+    <div class="header-date">
+      <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+        <rect x="1" y="2" width="10" height="9" rx="1.8"
+              stroke="currentColor" stroke-width="1.3"/>
+        <path d="M4 1v2M8 1v2"
+              stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+        <path d="M1 5h10" stroke="currentColor" stroke-width="1.3"/>
+      </svg>
+      <span id="dateText">날짜 로딩 중...</span>
+    </div>
+  </header>
+
+  <!-- ── MAIN ── -->
+  <main class="main">
+    <p class="section-label">SharePoint 바로가기</p>
+    <div class="grid" id="grid" role="list" aria-label="SharePoint 바로가기 목록"></div>
+    <noscript>
+      <p class="no-js-msg">
+        이 페이지는 JavaScript가 필요합니다.<br>
+        브라우저 설정에서 JavaScript를 활성화한 후 새로고침해 주세요.
+      </p>
+    </noscript>
+  </main>
+
+  <!-- ── FOOTER ── -->
+  <footer class="footer">
+    <div class="footer-brand">자이C&A</div>
+    <div class="footer-copy">© 2025 GS E&C XICNA Co., Ltd. All rights reserved.</div>
+  </footer>
+
+
+  <script>
+    /* =================================================================
+     * 모바일 업무 포털  ·  자이C&A
+     *
+     * ★ URL 교체  : APP_DATA 배열 → url 값 변경
+     * ★ 아이콘 교체: iconType:"image" + iconSrc:"./icons/파일명.png"
+     * ★ 항목 추가  : APP_DATA에 객체 추가 → 카드 자동 생성
+     * ================================================================= */
+
+
+    /* =================================================================
+     * [1] 앱 목록 데이터  ←  url 값을 실제 SharePoint 주소로 교체
+     *     iconBg: gradient 문자열 그대로 사용 가능 (CSS background 값)
+     * ================================================================= */
+    const APP_DATA = [
+      {
+        id: 1,
+        title:    '안전보건',
+        desc:     '안전보건 Platform',
+        url:      'https://gsenc.sharepoint.com/sites/xicnasafety/',          // ← URL 교체
+        iconType: 'svg',
+        iconSrc:  null,
+        icon:     'safe',
+        accent:   '#059669',
+        iconBg:   'linear-gradient(145deg, #D1FAE5, #6EE7B7)',  /* gradient 배경 */
+        iconClr:  '#065F46',
+      },
+      {
+        id: 2,
+        title:    '공무',
+        desc:     '공무 Platform',
+        url:      'https://gsenc.sharepoint.com/sites/projectcontrol/?poolIdx=1',  // ← URL 교체
+        iconType: 'svg',
+        iconSrc:  null,
+        icon:     'project',
+        accent:   '#2563EB',
+        iconBg:   'linear-gradient(145deg, #DBEAFE, #93C5FD)',
+        iconClr:  '#1E40AF',
+      },
+      {
+        id: 3,
+        title:    'BIM Portal',
+        desc:     'Smart Construction Platform',
+        url:      'https://gsenc.sharepoint.com/sites/SmartCon/',             // ← URL 교체
+        iconType: 'svg',
+        iconSrc:  null,
+        icon:     'bim',
+        accent:   '#7C3AED',
+        iconBg:   'linear-gradient(145deg, #EDE9FE, #C4B5FD)',
+        iconClr:  '#5B21B6',
+      },
+      {
+        id: 4,
+        title:    'DX Portal',
+        desc:     'Digital Transformation Platform',
+        url:      'https://gsenc.sharepoint.com/sites/xicnadx',               // ← URL 교체
+        iconType: 'svg',
+        iconSrc:  null,
+        icon:     'dx',
+        accent:   '#D97706',
+        iconBg:   'linear-gradient(145deg, #FEF3C7, #FCD34D)',
+        iconClr:  '#92400E',
+      },
+    ];
+
+
+    /* =================================================================
+     * [2] SVG 아이콘  ( {{C}} → iconClr 로 자동 치환 )
+     *
+     *     디자인 원칙:
+     *       · 채워진 형태 (filled) + 윤곽선 병용 → 작은 크기에서도 명확
+     *       · 두 가지 불투명도로 입체감 표현
+     *       · 아이콘 크기 48×48 기준
+     * ================================================================= */
+    const ICONS = {
+
+      /* 안전보건 — 방패 + 체크마크 */
+      safe: `<svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- 방패 내부 채움 (넓은 채움 → 입체감) -->
+        <path d="M24 4L7 11.5V24C7 34.6 14.8 43.6 24 47
+                 C33.2 43.6 41 34.6 41 24V11.5L24 4Z"
+              fill="{{C}}" opacity="0.22"/>
+        <!-- 방패 내부 하이라이트 (위쪽 밝은 영역) -->
+        <path d="M24 8L11 14.5V24C11 32.4 16.8 40 24 43
+                 C31.2 40 37 32.4 37 24V14.5L24 8Z"
+              fill="{{C}}" opacity="0.10"/>
+        <!-- 방패 테두리 -->
+        <path d="M24 4L7 11.5V24C7 34.6 14.8 43.6 24 47
+                 C33.2 43.6 41 34.6 41 24V11.5L24 4Z"
+              stroke="{{C}}" stroke-width="2.6"
+              stroke-linejoin="round" fill="none"/>
+        <!-- 체크마크 (두꺼운 획) -->
+        <path d="M14 24.5L21 31.5L34.5 18"
+              stroke="{{C}}" stroke-width="3.8"
+              stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>`,
+
+      /* 공무 — 도시 스카이라인 (두 개의 빌딩) */
+      project: `<svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- 왼쪽(낮은) 빌딩 채움 -->
+        <rect x="5" y="20" width="18" height="24" rx="1.5"
+              fill="{{C}}" opacity="0.18"/>
+        <!-- 왼쪽 빌딩 테두리 -->
+        <rect x="5" y="20" width="18" height="24" rx="1.5"
+              stroke="{{C}}" stroke-width="2.2"/>
+        <!-- 오른쪽(높은) 빌딩 채움 -->
+        <rect x="25" y="12" width="18" height="32" rx="1.5"
+              fill="{{C}}" opacity="0.14"/>
+        <!-- 오른쪽 빌딩 테두리 -->
+        <rect x="25" y="12" width="18" height="32" rx="1.5"
+              stroke="{{C}}" stroke-width="2.2"/>
+        <!-- 왼쪽 빌딩 창문 -->
+        <rect x="9"  y="25" width="4.5" height="4" rx=".8" fill="{{C}}" opacity="0.7"/>
+        <rect x="16" y="25" width="4.5" height="4" rx=".8" fill="{{C}}" opacity="0.7"/>
+        <rect x="9"  y="33" width="4.5" height="4" rx=".8" fill="{{C}}" opacity="0.7"/>
+        <rect x="16" y="33" width="4.5" height="4" rx=".8" fill="{{C}}" opacity="0.7"/>
+        <!-- 오른쪽 빌딩 창문 -->
+        <rect x="29" y="17" width="4" height="4" rx=".8" fill="{{C}}" opacity="0.7"/>
+        <rect x="36" y="17" width="4" height="4" rx=".8" fill="{{C}}" opacity="0.7"/>
+        <rect x="29" y="25" width="4" height="4" rx=".8" fill="{{C}}" opacity="0.7"/>
+        <rect x="36" y="25" width="4" height="4" rx=".8" fill="{{C}}" opacity="0.7"/>
+        <rect x="29" y="33" width="4" height="4" rx=".8" fill="{{C}}" opacity="0.7"/>
+        <rect x="36" y="33" width="4" height="4" rx=".8" fill="{{C}}" opacity="0.7"/>
+        <!-- 지평선 -->
+        <path d="M2 44H46"
+              stroke="{{C}}" stroke-width="2.8" stroke-linecap="round"/>
+      </svg>`,
+
+      /* BIM Portal — 아이소메트릭 3D 빌딩 큐브 */
+      bim: `<svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- 윗면 (가장 밝음) -->
+        <polygon points="24,4 42,14 24,24 6,14"
+                 fill="{{C}}" opacity="0.30"/>
+        <polygon points="24,4 42,14 24,24 6,14"
+                 stroke="{{C}}" stroke-width="2" stroke-linejoin="round" fill="none"/>
+        <!-- 오른쪽 앞면 (중간) -->
+        <polygon points="42,14 42,32 24,42 24,24"
+                 fill="{{C}}" opacity="0.45"/>
+        <polygon points="42,14 42,32 24,42 24,24"
+                 stroke="{{C}}" stroke-width="2" stroke-linejoin="round" fill="none"/>
+        <!-- 왼쪽 앞면 (가장 어둠) -->
+        <polygon points="6,14 24,24 24,42 6,32"
+                 fill="{{C}}" opacity="0.18"/>
+        <polygon points="6,14 24,24 24,42 6,32"
+                 stroke="{{C}}" stroke-width="2" stroke-linejoin="round" fill="none"/>
+        <!-- 중앙 세로 모서리 -->
+        <line x1="24" y1="24" x2="24" y2="42"
+              stroke="{{C}}" stroke-width="2.2" stroke-linecap="round"/>
+        <!-- 윗면 가로선 (격자 느낌) -->
+        <line x1="15" y1="19" x2="33" y2="9"
+              stroke="{{C}}" stroke-width="1" stroke-linecap="round" opacity="0.45"/>
+        <!-- 오른쪽면 세로 격자선 -->
+        <line x1="33" y1="19" x2="33" y2="37"
+              stroke="{{C}}" stroke-width="1" stroke-linecap="round" opacity="0.45"/>
+      </svg>`,
+
+      /* DX Portal — 번개 (디지털 전환/혁신) */
+      dx: `<svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- 원형 배경 -->
+        <circle cx="24" cy="24" r="19"
+                fill="{{C}}" opacity="0.12"/>
+        <circle cx="24" cy="24" r="19"
+                stroke="{{C}}" stroke-width="1.8" opacity="0.35" stroke-dasharray="3 3"/>
+        <!-- 번개 볼트 채움 -->
+        <path d="M29 6L13 27H23.5L20 42L35 21H24.5L29 6Z"
+              fill="{{C}}" opacity="0.30"/>
+        <!-- 번개 볼트 테두리 (굵게) -->
+        <path d="M29 6L13 27H23.5L20 42L35 21H24.5L29 6Z"
+              stroke="{{C}}" stroke-width="2.4"
+              stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      </svg>`,
+    };
+
+
+    /* =================================================================
+     * [3] URL 이동 방식
+     *   [방법 A] window.location.href  ← 현재 선택 (WebView 기본)
+     *   [방법 B] window.open           ← 외부 브라우저로 열기
+     *   자세한 설명은 DEPLOY.md 참조
+     * ================================================================= */
+    function openUrl(url) {
+      if (!url || url.trim() === '' || url === '#') {
+        console.warn('[Portal] URL이 설정되지 않았습니다:', url);
+        return;
+      }
+      try {
+        window.location.href = url;
+        /* window.open(url, '_blank', 'noopener,noreferrer'); */
+      } catch (err) {
+        console.error('[Portal] 페이지 이동 실패:', err);
+      }
+    }
+
+
+    /* =================================================================
+     * [4] 카드 HTML 빌더  (data-url 속성 — CSP 호환)
+     * ================================================================= */
+    function buildCard(item) {
+      const iconHtml = (item.iconType === 'image' && item.iconSrc)
+        ? `<img src="${item.iconSrc}" alt="${item.title} 아이콘" loading="lazy">`
+        : (ICONS[item.icon] || '').replace(/\{\{C\}\}/g, item.iconClr);
+
+      return `
+        <div class="card"
+             data-url="${item.url}"
+             style="--accent:${item.accent};"
+             role="listitem"
+             tabindex="0"
+             aria-label="${item.title} – ${item.desc} 바로가기">
+          <div class="icon-box" style="background:${item.iconBg};">
+            ${iconHtml}
+          </div>
+          <div class="card-title">${item.title}</div>
+          <div class="card-desc">${item.desc}</div>
+        </div>`;
+    }
+
+
+    /* =================================================================
+     * [5] 초기화
+     * ================================================================= */
+    function init() {
+      /* 날짜 */
+      const days = ['일', '월', '화', '수', '목', '금', '토'];
+      const d    = new Date();
+      document.getElementById('dateText').textContent =
+        `${d.getFullYear()}년 ${d.getMonth() + 1}월 ${d.getDate()}일 (${days[d.getDay()]})`;
+
+      /* 카드 렌더링 */
+      const grid = document.getElementById('grid');
+      grid.innerHTML = APP_DATA.map(buildCard).join('');
+
+      /* 이벤트 위임: 클릭 (CSP 'unsafe-inline' 불필요) */
+      grid.addEventListener('click', function (e) {
+        var card = e.target.closest('.card[data-url]');
+        if (card) openUrl(card.dataset.url);
+      });
+
+      /* 이벤트 위임: 키보드 */
+      grid.addEventListener('keydown', function (e) {
+        if (e.key !== 'Enter' && e.key !== ' ') return;
+        var card = e.target.closest('.card[data-url]');
+        if (card) { e.preventDefault(); openUrl(card.dataset.url); }
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', init);
+  </script>
+
+</body>
+</html>
