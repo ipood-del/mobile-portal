@@ -126,6 +126,15 @@
       display: flex; justify-content: center; margin-bottom: 8px;
     }
 
+    .header-logo-img {
+      height: 68px; width: auto; object-fit: contain;
+      filter: brightness(0) invert(1);
+    }
+
+    .footer-logo-img {
+      height: 52px; width: auto; object-fit: contain;
+    }
+
     /* ──────────────────────────────────────
        MAIN
     ────────────────────────────────────── */
@@ -304,13 +313,7 @@
   <!-- ── HEADER ── -->
   <header class="header">
     <div class="header-brand">
-      <!-- 자이 XI 브랜드 마크 (SVG 재현) -->
-      <svg width="52" height="51" viewBox="0 0 200 196" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="자이C&amp;A 로고">
-        <line x1="0" y1="8" x2="196" y2="188" stroke="white" stroke-width="27"/>
-        <path d="M0,188 L86,88 L86,8" stroke="white" stroke-width="27" stroke-linejoin="miter"/>
-        <path d="M86,8 L162,8 Q192,8 192,38 L192,88" stroke="white" stroke-width="27"/>
-      </svg>
-      <span class="brand-name">자이 C&amp;A</span>
+      <img src="./icons/logo-mark.png" alt="자이C&A" class="header-logo-img">
     </div>
     <h1 class="header-title">모바일 업무 포탈</h1>
     <p class="header-sub">주요 업무 시스템 바로가기</p>
@@ -338,14 +341,8 @@
   <!-- ── FOOTER ── -->
   <footer class="footer">
     <div class="footer-mark">
-      <!-- 자이 XI 브랜드 마크 (푸터용 다크 컬러) -->
-      <svg width="28" height="27" viewBox="0 0 200 196" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <line x1="0" y1="8" x2="196" y2="188" stroke="#0D3050" stroke-width="27"/>
-        <path d="M0,188 L86,88 L86,8" stroke="#0D3050" stroke-width="27" stroke-linejoin="miter"/>
-        <path d="M86,8 L162,8 Q192,8 192,38 L192,88" stroke="#0D3050" stroke-width="27"/>
-      </svg>
+      <img src="./icons/logo-mark.png" alt="자이C&A" class="footer-logo-img">
     </div>
-    <div class="footer-brand">자이C&amp;A</div>
     <div class="footer-copy">© 2026 자이C&A Co., Ltd. All rights reserved.</div>
   </footer>
 
