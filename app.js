@@ -118,9 +118,7 @@ var ICONS = {
 
 
 /* =================================================================
- * [3] URL 이동 방식
- *   [방법 A] window.location.href  ← 현재 선택 (WebView 기본)
- *   [방법 B] window.open           ← 외부 브라우저로 열기
+ * [3] URL 이동 방식 (외부 브라우저 / 앱으로 전환)
  * ================================================================= */
 function openUrl(url) {
   if (!url || url.trim() === '' || url === '#') {
@@ -128,11 +126,27 @@ function openUrl(url) {
     return;
   }
   try {
-    window.location.href = url;
-    /* window.open(url, '_blank', 'noopener,noreferrer'); */
+    window.open(url, '_blank', 'noopener,noreferrer');
   } catch (err) {
     console.error('[Portal] 페이지 이동 실패:', err);
+    window.location.href = url;
   }
+}
+
+/* SharePoint 앱 다운로드 — iOS: App Store / Android: Play Store */
+function openSharePointDownload() {
+  var ua = navigator.userAgent || '';
+  var isIOS     = /iPad|iPhone|iPod/.test(ua) && !window.MSStream;
+  var isAndroid = /Android/.test(ua);
+  var url;
+  if (isIOS) {
+    url = 'https://apps.apple.com/app/microsoft-sharepoint/id1091505266';
+  } else if (isAndroid) {
+    url = 'https://play.google.com/store/apps/details?id=com.microsoft.sharepoint';
+  } else {
+    url = 'https://www.microsoft.com/ko-kr/microsoft-365/sharepoint/collaboration';
+  }
+  window.open(url, '_blank', 'noopener,noreferrer');
 }
 
 
@@ -163,15 +177,9 @@ function buildCard(item) {
  * [5] 초기화
  * ================================================================= */
 function init() {
-  /* 날짜 */
-  var days = ['일', '월', '화', '수', '목', '금', '토'];
-  var d    = new Date();
-  var dateEl = document.getElementById('dateText');
-  if (dateEl) {
-    dateEl.textContent =
-      d.getFullYear() + '년 ' + (d.getMonth() + 1) + '월 ' +
-      d.getDate() + '일 (' + days[d.getDay()] + ')';
-  }
+  /* SharePoint 다운로드 버튼 */
+  var spBtn = document.getElementById('spDownloadBtn');
+  if (spBtn) spBtn.addEventListener('click', openSharePointDownload);
 
   /* 카드 렌더링 */
   var grid = document.getElementById('grid');

@@ -6,13 +6,13 @@
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="apple-mobile-web-app-title" content="업무 포털">
+  <meta name="apple-mobile-web-app-title" content="업무 포탈">
   <meta name="robots" content="noindex, nofollow">
   <meta name="format-detection" content="telephone=no, address=no, email=no">
   <meta name="theme-color" content="#006B8E">
-  <meta name="description" content="자이C&A 모바일 업무 포털 – SharePoint 주요 사이트 바로가기">
+  <meta name="description" content="자이C&A 모바일 업무 포탈 – SharePoint 주요 사이트 바로가기">
 
-  <title>모바일 업무 포털 | 자이C&A</title>
+  <title>모바일 업무 포탈 | 자이C&A</title>
 
   <!-- Favicon (인라인 SVG, 별도 파일 불필요) -->
   <link rel="icon" type="image/svg+xml"
@@ -86,15 +86,18 @@
       background: rgba(255,255,255,.05); pointer-events: none;
     }
 
-    .header-label {
-      font-size: 11px; font-weight: 700; letter-spacing: 2.5px;
-      text-transform: uppercase; color: rgba(255,255,255,.55);
-      margin-bottom: 10px; position: relative;
+    .header-brand {
+      display: inline-flex; align-items: center; gap: 10px;
+      margin-bottom: 14px; position: relative;
+    }
+    .brand-name {
+      font-size: 19px; font-weight: 900; letter-spacing: -0.5px;
+      color: rgba(255,255,255,.95);
     }
 
     .header-title {
-      font-size: 28px; font-weight: 900;
-      letter-spacing: -1px; line-height: 1.2;
+      font-size: 22px; font-weight: 900;
+      letter-spacing: -0.8px; line-height: 1.2;
       position: relative;
     }
 
@@ -104,15 +107,23 @@
       position: relative;
     }
 
-    .header-date {
-      display: inline-flex; align-items: center; gap: 6px;
+    .sharepoint-btn {
+      display: inline-flex; align-items: center; gap: 8px;
       margin-top: 20px;
-      background: rgba(255,255,255,.14);
-      border: 1px solid rgba(255,255,255,.22);
-      border-radius: 24px; padding: 7px 18px;
-      font-size: 12px; font-weight: 500;
-      color: rgba(255,255,255,.88);
-      position: relative;
+      background: rgba(255,255,255,.16);
+      border: 1.5px solid rgba(255,255,255,.32);
+      border-radius: 24px; padding: 9px 20px;
+      font-size: 12.5px; font-weight: 600;
+      color: rgba(255,255,255,.95);
+      cursor: pointer; font-family: inherit;
+      -webkit-tap-highlight-color: transparent;
+      transition: background .15s ease; position: relative;
+      letter-spacing: -0.2px;
+    }
+    .sharepoint-btn:active { background: rgba(255,255,255,.28); }
+
+    .footer-mark {
+      display: flex; justify-content: center; margin-bottom: 8px;
     }
 
     /* ──────────────────────────────────────
@@ -292,19 +303,23 @@
 
   <!-- ── HEADER ── -->
   <header class="header">
-    <p class="header-label">자이C&A</p>
-    <h1 class="header-title">모바일 업무 포털</h1>
-    <p class="header-sub">주요 업무 시스템 바로가기</p>
-    <div class="header-date">
-      <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
-        <rect x="1" y="2" width="10" height="9" rx="1.8"
-              stroke="currentColor" stroke-width="1.3"/>
-        <path d="M4 1v2M8 1v2"
-              stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
-        <path d="M1 5h10" stroke="currentColor" stroke-width="1.3"/>
+    <!-- 로고: 실제 로고 파일(icons/logo.png 등)로 교체 가능 -->
+    <div class="header-brand">
+      <svg width="34" height="34" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <rect width="34" height="34" rx="9" fill="rgba(255,255,255,0.18)" stroke="rgba(255,255,255,0.40)" stroke-width="1"/>
+        <path d="M9 11H25L9 23H25" stroke="white" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
       </svg>
-      <span id="dateText">날짜 로딩 중...</span>
+      <span class="brand-name">자이C&amp;A</span>
     </div>
+    <h1 class="header-title">모바일 업무 포탈</h1>
+    <p class="header-sub">주요 업무 시스템 바로가기</p>
+    <button class="sharepoint-btn" id="spDownloadBtn" type="button" aria-label="SharePoint 앱 다운로드">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+        <path d="M7 1.5v7M3.5 5.5L7 9.5l3.5-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M1 12h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+      SharePoint 앱 다운로드
+    </button>
   </header>
 
   <!-- ── MAIN ── -->
@@ -321,8 +336,14 @@
 
   <!-- ── FOOTER ── -->
   <footer class="footer">
-    <div class="footer-brand">자이C&A</div>
-    <div class="footer-copy">© 2025 자이C&A Co., Ltd. All rights reserved.</div>
+    <div class="footer-mark">
+      <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <rect width="28" height="28" rx="7" fill="#006B8E" opacity="0.10"/>
+        <path d="M7 9H21L7 19H21" stroke="#006B8E" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+    <div class="footer-brand">자이C&amp;A</div>
+    <div class="footer-copy">© 2026 자이C&A Co., Ltd. All rights reserved.</div>
   </footer>
 
 
