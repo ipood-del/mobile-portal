@@ -67,7 +67,7 @@
     .header {
       background: linear-gradient(150deg, #0082AA 0%, #005472 50%, #003D55 100%);
       color: #fff;
-      padding: 50px 24px 42px;
+      padding: 32px 24px 28px;
       position: relative;
       overflow: hidden;
       text-align: center;
@@ -87,29 +87,29 @@
     }
 
     .header-brand {
-      display: inline-flex; align-items: center; gap: 10px;
-      margin-bottom: 14px; position: relative;
+      display: flex; flex-direction: column; align-items: center;
+      gap: 6px; margin-bottom: 12px; position: relative;
     }
     .brand-name {
-      font-size: 19px; font-weight: 900; letter-spacing: -0.5px;
-      color: rgba(255,255,255,.95);
+      font-size: 13px; font-weight: 500; letter-spacing: 1.5px;
+      color: rgba(255,255,255,.80); text-transform: uppercase;
     }
 
     .header-title {
-      font-size: 22px; font-weight: 900;
+      font-size: 19px; font-weight: 900;
       letter-spacing: -0.8px; line-height: 1.2;
       position: relative;
     }
 
     .header-sub {
-      font-size: 13px; font-weight: 400;
-      color: rgba(255,255,255,.68); margin-top: 7px;
+      font-size: 12px; font-weight: 400;
+      color: rgba(255,255,255,.68); margin-top: 5px;
       position: relative;
     }
 
     .sharepoint-btn {
       display: inline-flex; align-items: center; gap: 8px;
-      margin-top: 20px;
+      margin-top: 14px;
       background: rgba(255,255,255,.16);
       border: 1.5px solid rgba(255,255,255,.32);
       border-radius: 24px; padding: 9px 20px;
@@ -303,13 +303,14 @@
 
   <!-- ── HEADER ── -->
   <header class="header">
-    <!-- 로고: 실제 로고 파일(icons/logo.png 등)로 교체 가능 -->
     <div class="header-brand">
-      <svg width="34" height="34" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <rect width="34" height="34" rx="9" fill="rgba(255,255,255,0.18)" stroke="rgba(255,255,255,0.40)" stroke-width="1"/>
-        <path d="M9 11H25L9 23H25" stroke="white" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+      <!-- 자이 XI 브랜드 마크 (SVG 재현) -->
+      <svg width="52" height="51" viewBox="0 0 200 196" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="자이C&amp;A 로고">
+        <line x1="0" y1="8" x2="196" y2="188" stroke="white" stroke-width="27"/>
+        <path d="M0,188 L86,88 L86,8" stroke="white" stroke-width="27" stroke-linejoin="miter"/>
+        <path d="M86,8 L162,8 Q192,8 192,38 L192,88" stroke="white" stroke-width="27"/>
       </svg>
-      <span class="brand-name">자이C&amp;A</span>
+      <span class="brand-name">자이 C&amp;A</span>
     </div>
     <h1 class="header-title">모바일 업무 포탈</h1>
     <p class="header-sub">주요 업무 시스템 바로가기</p>
@@ -324,8 +325,8 @@
 
   <!-- ── MAIN ── -->
   <main class="main">
-    <p class="section-label">SharePoint 바로가기</p>
-    <div class="grid" id="grid" role="list" aria-label="SharePoint 바로가기 목록"></div>
+    <p class="section-label">업무포탈 바로가기</p>
+    <div class="grid" id="grid" role="list" aria-label="업무포탈 바로가기 목록"></div>
     <noscript>
       <p class="no-js-msg">
         이 페이지는 JavaScript가 필요합니다.<br>
@@ -337,9 +338,11 @@
   <!-- ── FOOTER ── -->
   <footer class="footer">
     <div class="footer-mark">
-      <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <rect width="28" height="28" rx="7" fill="#006B8E" opacity="0.10"/>
-        <path d="M7 9H21L7 19H21" stroke="#006B8E" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+      <!-- 자이 XI 브랜드 마크 (푸터용 다크 컬러) -->
+      <svg width="28" height="27" viewBox="0 0 200 196" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <line x1="0" y1="8" x2="196" y2="188" stroke="#0D3050" stroke-width="27"/>
+        <path d="M0,188 L86,88 L86,8" stroke="#0D3050" stroke-width="27" stroke-linejoin="miter"/>
+        <path d="M86,8 L162,8 Q192,8 192,38 L192,88" stroke="#0D3050" stroke-width="27"/>
       </svg>
     </div>
     <div class="footer-brand">자이C&amp;A</div>
