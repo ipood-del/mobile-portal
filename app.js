@@ -13,8 +13,8 @@
 var APP_DATA = [
   {
     id: 1,
-    title:    '안전보건',
-    desc:     '안전보건 Platform',
+    title:    '안전보건 Platform',
+    desc:     'Safety & Health',
     url:      'https://gsenc.sharepoint.com/sites/xicnasafety/',          // ← URL 교체
     iconType: 'svg',
     iconSrc:  null,
@@ -25,8 +25,8 @@ var APP_DATA = [
   },
   {
     id: 2,
-    title:    '공무',
-    desc:     '공무 Platform',
+    title:    '공무 Platform',
+    desc:     'Project Control',
     url:      'https://gsenc.sharepoint.com/sites/projectcontrol/?poolIdx=1',  // ← URL 교체
     iconType: 'svg',
     iconSrc:  null,
